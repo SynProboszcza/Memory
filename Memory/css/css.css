@@ -1,0 +1,32 @@
+body {
+	background-color:black;
+	color:orange;
+	font-family:Verdana;
+	}
+.przycisk {
+	color:orange;
+	font-family:Verdana;
+	background-image:linear-gradient(to right,black,orange);
+}
+img {
+	display: block;
+	float:left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
