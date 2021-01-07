@@ -1,0 +1,41 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	border: 0 solid black;
+}
+body {
+	position: relative;
+	/*background-color:grey;*/
+}
+div.glowny {
+	top: calc(50vh - 200px); /* poprawic */
+	left: calc(50vw - 200px); /* poprawic */
+	position: absolute;
+border: 1px solid black;
+/*height:602px;*/
+height:614px; /* Poprawilem to za ciebie klocku niemyty */
+/*width:402px;*/
+width:402px;/* Poprawilem to za ciebie klocku niemyty to też */
+
+
+}
+
+img{
+	position: relative;
+	border: 1px solid pink;
+
+}
+
+.a,.b,.c,.d{
+
+}
+table,td {
+	border: 1px solid black;
+}
+
+
+.hidden {
+	display: none;
+}
+

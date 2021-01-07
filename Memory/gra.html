@@ -1,64 +1,150 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="refresh">
 	<script type ="text/javascript" src="js/dsbib.js"></script>
 	<script type ="text/javascript" src="js/js_start.js"></script>
-	<link rel="stylesheet" href="css/css.css">
+	<link rel="stylesheet" href="css/jd2.css">
 	<title>Memory</title>
 	<!-- 
 	Autorzy:
 	- Dawid Sójka
-	- Alicja Czaps
 	- Adam Majewski
+	- Alicja Czaps
 	- Błażej Bielik
 	-->
+<script>
+function podmien(){
+	poID('stronka').style.display = "block";
+	poID('przycisk').parentNode.removeChild(poID('przycisk'));
+}
+</script>
 </head>
-<body id="body" onselect="return false" ondragstart="return false" ondrag="return false">
-<p>TUTAJ BEDZIE GRA, BEDZA ELEMENTY</p>
-<a href="https://docs.google.com/document/d/1leoPhqhaNSaBn47wIwUhxFFTygKWtovRSc6iFxNx-Wc/edit?usp=sharing">mapa myśli</a><br>
-<img id="1"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="2"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="3"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="4"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="5"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="6"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="7"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="8"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="9"  src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="10" src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="11" src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="12" src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="13" src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="14" src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="15" src="karty/gotowe/tlo.png" height="150" width="100">
-<img id="16" src="karty/gotowe/tlo.png" height="150" width="100">
+<body onselect="return false" ondragstart="return false" ondrag="return false">
+<div id="menu1">
+	<button id="przycisk" onClick="podmien()">graj</button>
+</div>
+<section id="stronka">
+<div id="leaderboard" class="leader">
+	<?php
+	$db = new mysqli("localhost","root","a12345","memory");
+	// $db = new mysqli("localhost","root","","memory");
+
+	$sql = "SELECT nick, wynik FROM gracze ORDER BY wynik ASC LIMIT 10;";
+	$result = $db->query($sql);
+
+	if ($result->num_rows > 0) {
+		echo "<ol>";
+		while ($row = $result->fetch_assoc()) {
+			echo "<li class='nick'>".$row['nick']."</li> <li class='wynik'>".$row['wynik']."</li><br>";
+		}
+		echo "</ol>";
+	}
 
 
 
+	/*********************************/
+	//$db = mysqli_connect('localhost','root','a12345','memory');
+	// $db = mysqli_connect('localhost','root','','memory');
+	if(isset($_POST['nazwa'])){
+		$nazwa = $_POST['nazwa'];
+		$ilosc = $_POST['ilosc'];
+		// $sql = "INSERT INTO gracze VALUES (NULL, 'asd,'asd')";
+		$input = "INSERT INTO gracze VALUES (NULL, '".$nazwa."','".$ilosc."');";
+		mysqli_query($db, $input);
+		unset($_POST['nazwa']);
+		unset($_POST['ilosc']);
+	}
+	/*
+	$output = mysqli_query($db, "SELECT nick, wynik FROM gracze ORDER BY wynik ASC LIMIT 10;");
+
+	if($output->num_rows > 0){
+		echo "<table>";
+		while($row = $output->fetch_assoc()){
+			echo "<tr><td>".$row['nick']."</td><td>".$row['wynik']."</td></tr>";
+		}
+			echo "</table>";
+	}*/
+
+
+
+
+	// echo $_POST['nazwa'].'<br>';
+	// echo $_POST['ilosc'].'<br>';
+	// echo "Dodano cię do listy!";
+	mysqli_close($db);
+	// echo "<br><br><br>to jest wciaz WIP";
+	/************************************/
+
+
+
+
+
+
+
+
+
+/*	$db = mysqli_connect('localhost','root','a12345','memory');
+	$sql = "SELECT nick, wynik FROM gracze";
+	$output = mysqli_query($db,$sql);
+	$output = mysqli_fetch_array($output);
+	// print_r($output);
+	echo $output;
+	// echo '<br><br><br>';
+	// foreach ($output as $wartosc) {
+	// 	//echo $index;
+	// 	//echo $wartosc.'<br>';
+	// 	echo print_r($wartosc).', ';
+	// }
+
+	mysqli_close($db);*/
+	?>
+<button onclick="location.reload(true);">odświeźźź</button>
+</div>
+<div id="main" class="glowny">
+<!-- <img id="1"  class="a" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="2"  class="b" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="3"  class="c" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="4"  class="d" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="5"  class="e" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="6"  class="f" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="7"  class="g" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="8"  class="h" src="karty/gotowe/tlo.png" height="150" width="100">
+
+bufor.length = 69;
+if(zwyciezca==undefined){var zwyciezca = "hajs";} else {zwyciezca = "hajs";}
+poID('a').value = zwyciezca;
+poID('b').value = bufor.length;
+alert('Dziekujemy '+zwyciezca.pierwszaDuza()+' za zagranie! ;)\nUkończyłeś grę w '+bufor.length+' kliknięć!');
+poID('form').submit();
+
+<img id="9"  class="i" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="10" class="j" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="11" class="k" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="12" class="l" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="13" class="m" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="14" class="n" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="15" class="o" src="karty/gotowe/tlo.png" height="150" width="100">
+<img id="16" class="p" src="karty/gotowe/tlo.png" height="150" width="100"> -->
+</div>
+<div id="logo1" class="logomo"></div>
+<form id="form" method="post" class="hidden">
+<!-- <form id="form" method="post" action="php/dodaj.php" class="hidden"> -->
+	<input id="a" type="text" name="nazwa">
+	<input id="b" type="number" name="ilosc">
+</form>
+
+<footer>
+<p><span class="dd">dawid "sója",</span><span class="aa"> adam "ludwike",</span><span class="ac"> alicja "caps",</span><span class="bb"> błażej "błaszko",</span></p>
+</footer>
 <script src="js/js_end.js"></script>
+</section>
 </body>
 
 
 
 </html>
 
-<!--
-	wywalam bo dodałem eventlistenery
-onclick="odwrocKarte(1)" 
-onclick="odwrocKarte(2)" 
-onclick="odwrocKarte(3)" 
-onclick="odwrocKarte(4)" 
-onclick="odwrocKarte(5)" 
-onclick="odwrocKarte(6)" 
-onclick="odwrocKarte(7)" 
-onclick="odwrocKarte(8)" 
-onclick="odwrocKarte(9)" 
-onclick="odwrocKarte(10)"
-onclick="odwrocKarte(11)"
-onclick="odwrocKarte(12)"
-onclick="odwrocKarte(13)"
-onclick="odwrocKarte(14)"
-onclick="odwrocKarte(15)"
-onclick="odwrocKarte(16)"
--->
+
